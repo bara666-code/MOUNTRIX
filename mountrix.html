@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basecamp Haikal | The Gateway to Gede</title>
+    <title>Basecamp Mountrix | The Gateway to Gede</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;700&display=swap" rel="stylesheet">
     <style>
@@ -20,6 +20,7 @@
             <a href="#tentang" class="hover:text-white transition">Tentang</a>
             <a href="#harga" class="hover:text-white transition">Pricelist</a>
             <a href="#booking" class="hover:text-white transition">Booking</a>
+            <a href="#galeri" class="hover:text-white transition">Galeri</a>
         </div>
         <a href="#booking" class="px-6 py-2 border border-zinc-700 hover:border-emerald-500 hover:bg-emerald-500 transition text-xs font-bold uppercase rounded-full">Booking</a>
     </nav>
@@ -34,7 +35,7 @@
         </div>
     </header>
 
-    <!-- Pricing Section (4 Paket) -->
+    <!-- Pricing Section -->
     <section id="harga" class="py-20 px-12">
         <h2 class="text-4xl font-bold mb-12">Pricelist</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -61,8 +62,19 @@
         </div>
     </section>
 
+    <!-- Galeri (1:1) -->
+    <section id="galeri" class="py-20 px-12 bg-zinc-950">
+        <h2 class="text-3xl font-bold mb-12">Dokumentasi</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="aspect-square overflow-hidden"><img src="https://github.com/bara666-code/haikal/blob/main/pemandangan.jpg?raw=true" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
+            <div class="aspect-square overflow-hidden"><img src="https://github.com/bara666-code/haikal/blob/main/surken.jpg?raw=true" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
+            <div class="aspect-square overflow-hidden"><img src="https://github.com/bara666-code/haikal/blob/main/puncak.jpg?raw=true" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
+            <div class="aspect-square overflow-hidden"><img src="https://images.unsplash.com/photo-1518773553538-209214771485" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
+        </div>
+    </section>
+
     <!-- Booking Section -->
-    <section id="booking" class="py-20 px-12 bg-zinc-950 border-t border-zinc-900">
+    <section id="booking" class="py-20 px-12 border-t border-zinc-900">
         <div class="max-w-xl mx-auto">
             <h2 class="text-3xl font-bold mb-8">Pesan Booking Sekarang</h2>
             <form id="bookingForm" class="space-y-4">
@@ -104,7 +116,7 @@
             const date = document.getElementById('date').value;
             const pax = document.getElementById('pax').value;
             
-            const message = `Halo Admin Basecamp Haikal, saya ingin booking slot pendakian:%0A%0A*Nama:* ${name}%0A*Paket:* ${pkg}%0A*Tanggal:* ${date}%0A*Jumlah Pendaki:* ${pax} orang%0A%0AMohon informasinya, terima kasih.`;
+            const message = `Halo Admin Basecamp Mountrix, saya ingin booking slot pendakian:%0A%0A*Nama:* ${name}%0A*Paket:* ${pkg}%0A*Tanggal:* ${date}%0A*Jumlah Pendaki:* ${pax} orang%0A%0AMohon informasinya, terima kasih.`;
             
             window.open(`https://wa.me/6283817718819?text=${message}`, '_blank');
         });
