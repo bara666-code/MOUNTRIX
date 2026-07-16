@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basecamp Haikal | The Gateway to Gede</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .hero-gradient { background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.9) 100%); }
+    </style>
+</head>
+<body class="bg-black text-white">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 flex justify-between items-center px-8 py-6 backdrop-blur-sm bg-black/50">
+        <div class="text-xl font-bold tracking-tighter">MOUNTRIX<span class="text-emerald-500">.</span></div>
+        <div class="hidden md:flex space-x-8 text-xs uppercase tracking-widest font-bold text-zinc-400">
+            <a href="#tentang" class="hover:text-white transition">Tentang</a>
+            <a href="#harga" class="hover:text-white transition">Pricelist</a>
+            <a href="#booking" class="hover:text-white transition">Booking</a>
+        </div>
+        <a href="#booking" class="px-6 py-2 border border-zinc-700 hover:border-emerald-500 hover:bg-emerald-500 transition text-xs font-bold uppercase rounded-full">Booking</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="tentang" class="relative h-screen flex flex-col justify-end p-12">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070')] bg-cover bg-center"></div>
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="relative z-10 max-w-2xl">
+            <h1 class="text-6xl md:text-8xl font-bold leading-none mb-6">Gede<br>via Putri</h1>
+            <p class="text-zinc-300 text-lg mb-8 max-w-md">Gerbang pendakian paling efisien menuju Alun-Alun Suryakencana. Siapkan dirimu di Basecamp Mountrix.</p>
+        </div>
+    </header>
+
+    <!-- Pricing Section (4 Paket) -->
+    <section id="harga" class="py-20 px-12">
+        <h2 class="text-4xl font-bold mb-12">Pricelist</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="p-8 border border-zinc-800 hover:bg-zinc-900 transition">
+                <span class="text-xs text-emerald-500 uppercase font-bold">Mandiri</span>
+                <h4 class="text-xl mt-2 font-bold">SIMAKSI WNI</h4>
+                <p class="text-3xl font-bold mt-4">Rp 29k</p>
+            </div>
+            <div class="p-8 border border-zinc-800 hover:bg-zinc-900 transition">
+                <span class="text-xs text-emerald-500 uppercase font-bold">Basic</span>
+                <h4 class="text-xl mt-2 font-bold">Basecamp Stay</h4>
+                <p class="text-3xl font-bold mt-4">Rp 50k</p>
+            </div>
+            <div class="p-8 border border-zinc-800 hover:bg-zinc-900 transition">
+                <span class="text-xs text-emerald-500 uppercase font-bold">Medium</span>
+                <h4 class="text-xl mt-2 font-bold">Full Logistik</h4>
+                <p class="text-3xl font-bold mt-4">Rp 150k</p>
+            </div>
+            <div class="p-8 border border-emerald-900 bg-emerald-950/30">
+                <span class="text-xs text-emerald-500 uppercase font-bold">Premium</span>
+                <h4 class="text-xl mt-2 font-bold">Terima Beres</h4>
+                <p class="text-3xl font-bold mt-4 text-emerald-400">Custom</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="py-20 px-12 bg-zinc-950 border-t border-zinc-900">
+        <div class="max-w-xl mx-auto">
+            <h2 class="text-3xl font-bold mb-8">Pesan Booking Sekarang</h2>
+            <form id="bookingForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs uppercase text-zinc-500 mb-1">Nama Lengkap</label>
+                    <input type="text" id="name" required class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded focus:border-emerald-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase text-zinc-500 mb-1">Pilih Paket</label>
+                    <select id="package" required class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded focus:border-emerald-500 outline-none">
+                        <option value="SIMAKSI WNI">SIMAKSI WNI (Rp 29k)</option>
+                        <option value="Basecamp Stay">Basecamp Stay (Rp 50k)</option>
+                        <option value="Full Logistik">Full Logistik (Rp 150k)</option>
+                        <option value="Terima Beres">Terima Beres (Custom)</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase text-zinc-500 mb-1">Tanggal</label>
+                        <input type="date" id="date" required class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded focus:border-emerald-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase text-zinc-500 mb-1">Jumlah Orang</label>
+                        <input type="number" id="pax" required class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded focus:border-emerald-500 outline-none">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white p-4 font-bold uppercase tracking-widest text-sm transition">
+                    Kirim via WhatsApp
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const pkg = document.getElementById('package').value;
+            const date = document.getElementById('date').value;
+            const pax = document.getElementById('pax').value;
+            
+            const message = `Halo Admin Basecamp Haikal, saya ingin booking slot pendakian:%0A%0A*Nama:* ${name}%0A*Paket:* ${pkg}%0A*Tanggal:* ${date}%0A*Jumlah Pendaki:* ${pax} orang%0A%0AMohon informasinya, terima kasih.`;
+            
+            window.open(`https://wa.me/6283817718819?text=${message}`, '_blank');
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="px-12 py-10 border-t border-zinc-900 text-xs text-zinc-600 text-center">
+        <p>© 2026 BASECAMP MOUNTRIX</p>
+    </footer>
+
+</body>
+</html>
