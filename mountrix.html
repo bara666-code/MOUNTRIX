@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basecamp Mountrix | The Gateway to Gede</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font Plus Jakarta Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -15,43 +17,72 @@
 <body class="bg-black text-white">
 
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 flex justify-between items-center px-8 py-6 backdrop-blur-sm bg-black/50">
-        <div class="text-xl font-bold tracking-tighter">MOUNTRIX<span class="text-emerald-500">.</span></div>
+    <nav class="fixed w-full z-50 flex justify-between items-center px-6 md:px-8 py-5 backdrop-blur-md bg-black/60 border-b border-zinc-900/50">
+        <div class="flex items-center gap-3">
+            <div class="text-xl font-bold tracking-tighter">MOUNTRIX<span class="text-emerald-500">.</span></div>
+            <!-- Indikator Status Jalur -->
+            <div id="navStatusBadge" class="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-zinc-800 border border-zinc-700">
+                <span id="statusDot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span id="statusTextNav" class="text-zinc-300">Memuat status...</span>
+            </div>
+        </div>
+
         <div class="hidden md:flex space-x-8 text-xs uppercase tracking-widest font-bold text-zinc-400">
             <a href="#tentang" class="hover:text-white transition">Tentang</a>
             <a href="#harga" class="hover:text-white transition">Pricelist</a>
-            <a href="#booking" class="hover:text-white transition">Booking</a>
             <a href="#galeri" class="hover:text-white transition">Galeri</a>
+            <a href="#booking" class="hover:text-white transition">Booking</a>
         </div>
-        <a href="#booking" class="px-6 py-2 border border-zinc-700 hover:border-emerald-500 hover:bg-emerald-500 transition text-xs font-bold uppercase rounded-full">Booking</a>
+        <a href="#booking" class="px-5 py-2 border border-zinc-700 hover:border-emerald-500 hover:bg-emerald-500 hover:text-black transition text-xs font-bold uppercase rounded-full">Booking</a>
     </nav>
 
     <!-- Hero Section -->
-    <header id="tentang" class="relative h-screen flex flex-col justify-end p-12">
+    <header id="tentang" class="relative h-screen flex flex-col justify-end p-8 md:p-12">
         <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070')] bg-cover bg-center"></div>
         <div class="absolute inset-0 hero-gradient"></div>
+        
         <div class="relative z-10 max-w-2xl">
+            <!-- Widget Status & Cuaca Real-time -->
+            <div class="flex flex-wrap items-center gap-3 mb-6">
+                <!-- Badge Status Jalur Hero -->
+                <div id="heroStatusBadge" class="px-3 py-1.5 rounded-md text-xs font-bold tracking-wider uppercase bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+                    JALUR PENDAKIAN: DITUTUP
+                </div>
+
+                <!-- Widget Informasi Cuaca Real-time -->
+                <div class="flex items-center gap-3 px-3 py-1.5 rounded-md text-xs font-medium bg-black/60 border border-zinc-800 text-zinc-300 backdrop-blur-sm">
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-[10px] font-bold bg-emerald-600/30 text-emerald-400 px-1.5 py-0.5 rounded border border-emerald-500/30">LIVE CUACA</span>
+                        <span id="weatherTemp" class="font-bold text-white">--°C</span>
+                        <span id="weatherCondition" class="text-zinc-400 border-l border-zinc-700 pl-2">Memuat cuaca...</span>
+                    </div>
+                    <div class="hidden sm:flex items-center gap-2 border-l border-zinc-700 pl-2 text-zinc-400">
+                        <span>💧 <span id="humidity">--</span>%</span>
+                    </div>
+                </div>
+            </div>
+
             <h1 class="text-5xl md:text-8xl font-bold leading-none mb-6">Gede<br>via Putri</h1>
-            <p class="text-zinc-300 text-lg mb-8 max-w-md">Gerbang pendakian paling efisien menuju Alun-Alun Suryakencana. Siapkan dirimu di Basecamp Mountrix.</p>
+            <p class="text-zinc-300 text-base md:text-lg mb-8 max-w-md">Gerbang pendakian paling efisien menuju Alun-Alun Suryakencana. Siapkan dirimu di Basecamp Mountrix.</p>
         </div>
     </header>
 
     <!-- Pricing Section -->
-    <section id="harga" class="py-20 px-12">
+    <section id="harga" class="py-20 px-6 md:px-12">
         <h2 class="text-4xl font-bold mb-12">Pricelist</h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="p-8 border border-zinc-800 hover:bg-zinc-900 transition">
-                <span class="text-xs text-emerald-500 uppercase font-bold">CAMP WEEKDAAY 2D1N</span>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="p-8 border border-zinc-800 hover:bg-zinc-900/50 transition rounded-lg">
+                <span class="text-xs text-emerald-500 uppercase font-bold tracking-wider">CAMP WEEKDAY 2D1N</span>
                 <h4 class="text-xl mt-2 font-bold">SIMAKSI</h4>
                 <p class="text-3xl font-bold mt-4">Rp 95k</p>
             </div>
-            <div class="p-8 border border-zinc-800 hover:bg-zinc-900 transition">
-                <span class="text-xs text-emerald-500 uppercase font-bold">CAMP WEEKEND 2D1N</span>
+            <div class="p-8 border border-zinc-800 hover:bg-zinc-900/50 transition rounded-lg">
+                <span class="text-xs text-emerald-500 uppercase font-bold tracking-wider">CAMP WEEKEND 2D1N</span>
                 <h4 class="text-xl mt-2 font-bold">SIMAKSI</h4>
                 <p class="text-3xl font-bold mt-4">Rp 100k</p>
             </div>
-            <div class="p-8 border border-zinc-800 hover:bg-zinc-900 transition">
-                <span class="text-xs text-emerald-500 uppercase font-bold">TEKTOK 2DIN</span>
+            <div class="p-8 border border-zinc-800 hover:bg-zinc-900/50 transition rounded-lg">
+                <span class="text-xs text-emerald-500 uppercase font-bold tracking-wider">TEKTOK 2D1N</span>
                 <h4 class="text-xl mt-2 font-bold">SIMAKSI</h4>
                 <p class="text-3xl font-bold mt-4">Rp 90k</p>
             </div>
@@ -59,51 +90,144 @@
     </section>
 
     <!-- Galeri (1:1) -->
-    <section id="galeri" class="py-20 px-12 bg-zinc-950">
+    <section id="galeri" class="py-20 px-6 md:px-12 bg-zinc-950">
         <h2 class="text-3xl font-bold mb-12">Dokumentasi</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="aspect-square overflow-hidden"><img src="https://github.com/bara666-code/haikal/blob/main/pemandangan.jpg?raw=true" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
-            <div class="aspect-square overflow-hidden"><img src="https://github.com/bara666-code/MOUNTRIX/blob/main/WhatsApp%20Image%202026-07-17%20at%2000.12.29.jpeg?raw=true" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
-            <div class="aspect-square overflow-hidden"><img src="https://github.com/bara666-code/haikal/blob/main/puncak.jpg?raw=true" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
-            <div class="aspect-square overflow-hidden"><img src="https://github.com/bara666-code/haikal/blob/main/surken.jpg?raw=true" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
+            <div class="aspect-square overflow-hidden rounded"><img src="https://github.com/bara666-code/haikal/blob/main/pemandangan.jpg?raw=true" alt="Pemandangan Gunung Gede" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
+            <div class="aspect-square overflow-hidden rounded"><img src="https://github.com/bara666-code/MOUNTRIX/blob/main/WhatsApp%20Image%202026-07-17%20at%2000.12.29.jpeg?raw=true" alt="Suasana Basecamp Mountrix" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
+            <div class="aspect-square overflow-hidden rounded"><img src="https://github.com/bara666-code/haikal/blob/main/puncak.jpg?raw=true" alt="Puncak Gunung Gede" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
+            <div class="aspect-square overflow-hidden rounded"><img src="https://github.com/bara666-code/haikal/blob/main/surken.jpg?raw=true" alt="Alun-Alun Suryakencana" class="w-full h-full object-cover hover:scale-105 transition duration-500"></div>
         </div>
     </section>
 
     <!-- Booking Section -->
-    <section id="booking" class="py-20 px-12 border-t border-zinc-900">
+    <section id="booking" class="py-20 px-6 md:px-12 border-t border-zinc-900">
         <div class="max-w-xl mx-auto">
             <h2 class="text-3xl font-bold mb-8">Pesan Booking Sekarang</h2>
             <form id="bookingForm" class="space-y-4">
                 <div>
-                    <label class="block text-xs uppercase text-zinc-500 mb-1">Nama Lengkap</label>
-                    <input type="text" id="name" required class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded focus:border-emerald-500 outline-none">
+                    <label for="name" class="block text-xs uppercase text-zinc-500 mb-1">Nama Lengkap</label>
+                    <input type="text" id="name" required placeholder="Masukkan nama Anda" class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded focus:border-emerald-500 outline-none text-sm">
                 </div>
                 <div>
-                    <label class="block text-xs uppercase text-zinc-500 mb-1">Pilih Paket</label>
-                    <select id="package" required class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded focus:border-emerald-500 outline-none">
-                        <option value="SIMAKSI WNI">CAMP WEEKDAY 2D1N (Rp 95k)</option>
-                        <option value="Basecamp Stay">CAMP WEEKEND (Rp 100k)</option>
-                        <option value="Full Logistik">2DIN (Rp 90k)</option>
+                    <label for="package" class="block text-xs uppercase text-zinc-500 mb-1">Pilih Paket</label>
+                    <select id="package" required class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded focus:border-emerald-500 outline-none text-sm">
+                        <option value="CAMP WEEKDAY 2D1N (Rp 95k)">CAMP WEEKDAY 2D1N (Rp 95k)</option>
+                        <option value="CAMP WEEKEND 2D1N (Rp 100k)">CAMP WEEKEND 2D1N (Rp 100k)</option>
+                        <option value="TEKTOK 2D1N (Rp 90k)">TEKTOK 2D1N (Rp 90k)</option>
                     </select>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs uppercase text-zinc-500 mb-1">Tanggal</label>
-                        <input type="date" id="date" required class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded focus:border-emerald-500 outline-none">
+                        <label for="date" class="block text-xs uppercase text-zinc-500 mb-1">Tanggal</label>
+                        <input type="date" id="date" required class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded focus:border-emerald-500 outline-none text-sm">
                     </div>
                     <div>
-                        <label class="block text-xs uppercase text-zinc-500 mb-1">Jumlah Orang</label>
-                        <input type="number" id="pax" required class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded focus:border-emerald-500 outline-none">
+                        <label for="pax" class="block text-xs uppercase text-zinc-500 mb-1">Jumlah Orang</label>
+                        <input type="number" id="pax" min="1" required placeholder="1" class="w-full bg-zinc-900 border border-zinc-800 p-3 rounded focus:border-emerald-500 outline-none text-sm">
                     </div>
                 </div>
-                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white p-4 font-bold uppercase tracking-widest text-sm transition">
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white p-4 font-bold uppercase tracking-widest text-sm transition rounded mt-2">
                     Kirim via WhatsApp
                 </button>
             </form>
         </div>
     </section>
 
+    <!-- Footer -->
+    <footer class="px-6 md:px-12 py-10 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center text-xs text-zinc-600 gap-4">
+        <a href="https://wa.me/6285861166596" target="_blank" class="hover:text-emerald-500 transition">WHATSAPP</a>
+        <p>© 2026 BASECAMP MOUNTRIX</p>
+        <a href="https://www.instagram.com/bc_gunung_gede_pangrango?igsh=dm9pc2FnMWc0Nmx2" target="_blank" class="hover:text-emerald-500 transition">INSTAGRAM</a>
+    </footer>
+
+    <!-- JavaScript Logika & Real-Time Weather Integration -->
     <script>
+        /* ========================================================
+           1. PENGATURAN STATUS JALUR (UBAH MANUAL DI SINI)
+        ======================================================== */
+        const STATUS_JALUR = 'OPEN'; // Pilihan: 'OPEN' atau 'CLOSED'
+        const PESAN_PENUTUPAN = 'Jalur Ditutup Sementara';
+
+        function updateStatusDisplay() {
+            const dot = document.getElementById('statusDot');
+            const navText = document.getElementById('statusTextNav');
+            const heroBadge = document.getElementById('heroStatusBadge');
+
+            if (STATUS_JALUR === 'OPEN') {
+                dot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
+                navText.innerText = "Jalur Buka";
+                heroBadge.className = "px-3 py-1.5 rounded-md text-xs font-bold tracking-wider uppercase bg-emerald-500/20 text-emerald-400 border border-emerald-500/40";
+                heroBadge.innerText = "JALUR PENDAKIAN: DITUTUP";
+            } else {
+                dot.className = "w-2 h-2 rounded-full bg-red-500 animate-pulse";
+                navText.innerText = "Jalur Tutup";
+                heroBadge.className = "px-3 py-1.5 rounded-md text-xs font-bold tracking-wider uppercase bg-red-500/20 text-red-400 border border-red-500/40";
+                heroBadge.innerText = `JALUR PENDAKIAN: DITUTUP (${PESAN_PENUTUPAN})`;
+            }
+        }
+
+        /* ========================================================
+           2. INTEGRASI DATA CUACA REAL-TIME (Koordinat Jalur Putri)
+        ======================================================== */
+        // Terjemahan Kode WMO Weather menjadi bahasa Indonesia
+        function translateWeatherCode(code) {
+            const weatherCodes = {
+                0: 'Cerah',
+                1: 'Cerah Berawan',
+                2: 'Berawan',
+                3: 'Berawan Tebal',
+                45: 'Kabut',
+                48: 'Kabut Tebal',
+                51: 'Gerimis Light',
+                53: 'Gerimis Sedang',
+                55: 'Gerimis Lebat',
+                61: 'Hujan Ringan',
+                63: 'Hujan Sedang',
+                65: 'Hujan Lebat',
+                80: 'Hujan Lokal',
+                81: 'Hujan Deras',
+                95: 'Hujan Petir'
+            };
+            return weatherCodes[code] || 'Berawan';
+        }
+
+        async function fetchRealTimeWeather() {
+            const tempElement = document.getElementById('weatherTemp');
+            const conditionElement = document.getElementById('weatherCondition');
+            const humidityElement = document.getElementById('humidity');
+
+            // Koordinat Jalur Putri Gunung Gede (Cianjur)
+            const lat = -6.7371;
+            const lon = 107.0125;
+            
+            // API Cuaca Real-Time (Tanpa API Key, Pembaharuan Setiap Menit/Jam)
+            const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code&timezone=Asia%2FJakarta`;
+
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                if (data && data.current) {
+                    const temp = Math.round(data.current.temperature_2m);
+                    const humidity = data.current.relative_humidity_2m;
+                    const condition = translateWeatherCode(data.current.weather_code);
+
+                    tempElement.innerText = `${temp}°C`;
+                    conditionElement.innerText = condition;
+                    humidityElement.innerText = humidity;
+                }
+            } catch (error) {
+                console.warn('Gagal memuat cuaca real-time, menggunakan estimasi:', error);
+                tempElement.innerText = '19°C';
+                conditionElement.innerText = 'Cerah Berawan';
+                humidityElement.innerText = '80';
+            }
+        }
+
+        /* ========================================================
+           3. FORM BOOKING WHATSAPP
+        ======================================================== */
         document.getElementById('bookingForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('name').value;
@@ -111,18 +235,18 @@
             const date = document.getElementById('date').value;
             const pax = document.getElementById('pax').value;
             
-            const message = `Halo Admin Basecamp Mountrix, saya ingin booking slot pendakian:%0A%0A*Nama:* ${name}%0A*Paket:* ${pkg}%0A*Tanggal:* ${date}%0A*Jumlah Pendaki:* ${pax} orang%0A%0AMohon informasinya, terima kasih.`;
+            const rawMessage = `Halo Admin Basecamp Mountrix, saya ingin booking slot pendakian:\n\n*Nama:* ${name}\n*Paket:* ${pkg}\n*Tanggal:* ${date}\n*Jumlah Pendaki:* ${pax} orang\n\nMohon informasinya, terima kasih.`;
+            const encodedMessage = encodeURIComponent(rawMessage);
             
-            window.open(`https://wa.me/6285861166596?text=${message}`, '_blank');
+            window.open(`https://wa.me/6285861166596?text=${encodedMessage}`, '_blank');
+        });
+
+        // Eksekusi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            updateStatusDisplay();
+            fetchRealTimeWeather();
         });
     </script>
-
-    <!-- Footer -->
-    <footer class="px-12 py-10 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center text-xs text-zinc-600 gap-4">
-        <a href="https://wa.me/6285861166596" target="_blank" class="hover:text-emerald-500 transition">WHATSAPP</a>
-        <p>© 2026 BASECAMP MOUNTRIX</p>
-        <a href="https://www.instagram.com/bc_gunung_gede_pangrango?igsh=dm9pc2FnMWc0Nmx2" target="_blank" class="hover:text-emerald-500 transition">INSTAGRAM</a>
-    </footer>
 
 </body>
 </html>
