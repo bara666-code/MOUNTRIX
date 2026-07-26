@@ -46,13 +46,15 @@
             <div class="flex flex-wrap items-center gap-3 mb-6">
                 <!-- Badge Status Jalur Hero -->
                 <div id="heroStatusBadge" class="px-3 py-1.5 rounded-md text-xs font-bold tracking-wider uppercase bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
-                    JALUR PENDAKIAN: DITUTUP
+                    JALUR PENDAKIAN: MEMUAT...
                 </div>
 
                 <!-- Widget Informasi Cuaca Real-time -->
                 <div class="flex items-center gap-3 px-3 py-1.5 rounded-md text-xs font-medium bg-black/60 border border-zinc-800 text-zinc-300 backdrop-blur-sm">
                     <div class="flex items-center gap-1.5">
-                        <span class="text-[10px] font-bold bg-emerald-600/30 text-emerald-400 px-1.5 py-0.5 rounded border border-emerald-500/30">LIVE CUACA</span>
+                        <span class="text-[10px] font-bold bg-emerald-600/30 text-emerald-400 px-1.5 py-0.5 rounded border border-emerald-500/30 flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> LIVE
+                        </span>
                         <span id="weatherTemp" class="font-bold text-white">--°C</span>
                         <span id="weatherCondition" class="text-zinc-400 border-l border-zinc-700 pl-2">Memuat cuaca...</span>
                     </div>
@@ -141,12 +143,12 @@
         <a href="https://www.instagram.com/bc_gunung_gede_pangrango?igsh=dm9pc2FnMWc0Nmx2" target="_blank" class="hover:text-emerald-500 transition">INSTAGRAM</a>
     </footer>
 
-    <!-- JavaScript Logika & Real-Time Weather Integration -->
+    <!-- JavaScript Logika & Auto-Update Real-Time Weather -->
     <script>
         /* ========================================================
            1. PENGATURAN STATUS JALUR (UBAH MANUAL DI SINI)
         ======================================================== */
-        const STATUS_JALUR = 'OPEN'; // Pilihan: 'OPEN' atau 'CLOSED'
+        const STATUS_JALUR = 'OPEN'; // Ubah 'OPEN' untuk Buka, atau 'CLOSED' untuk Tutup
         const PESAN_PENUTUPAN = 'Jalur Ditutup Sementara';
 
         function updateStatusDisplay() {
@@ -156,9 +158,9 @@
 
             if (STATUS_JALUR === 'OPEN') {
                 dot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
-                navText.innerText = "Jalur Tutup";
+                navText.innerText = "Jalur Buka";
                 heroBadge.className = "px-3 py-1.5 rounded-md text-xs font-bold tracking-wider uppercase bg-emerald-500/20 text-emerald-400 border border-emerald-500/40";
-                heroBadge.innerText = "JALUR PENDAKIAN: DITUTUP";
+                heroBadge.innerText = "JALUR PENDAKIAN: BUKA";
             } else {
                 dot.className = "w-2 h-2 rounded-full bg-red-500 animate-pulse";
                 navText.innerText = "Jalur Tutup";
@@ -168,9 +170,8 @@
         }
 
         /* ========================================================
-           2. INTEGRASI DATA CUACA REAL-TIME (Koordinat Jalur Putri)
+           2. INTEGRASI DATA CUACA REAL-TIME (UPDATE OTOMATIS)
         ======================================================== */
-        // Terjemahan Kode WMO Weather menjadi bahasa Indonesia
         function translateWeatherCode(code) {
             const weatherCodes = {
                 0: 'Cerah',
@@ -179,7 +180,7 @@
                 3: 'Berawan Tebal',
                 45: 'Kabut',
                 48: 'Kabut Tebal',
-                51: 'Gerimis Light',
+                51: 'Gerimis Ringan',
                 53: 'Gerimis Sedang',
                 55: 'Gerimis Lebat',
                 61: 'Hujan Ringan',
@@ -197,15 +198,17 @@
             const conditionElement = document.getElementById('weatherCondition');
             const humidityElement = document.getElementById('humidity');
 
-            // Koordinat Jalur Putri Gunung Gede (Cianjur)
+            // Koordinat Jalur Putri (-6.7371, 107.0125) & Ketinggian Basecamp (~1450 mdpl)
             const lat = -6.7371;
             const lon = 107.0125;
+            const elevation = 1450; 
             
-            // API Cuaca Real-Time (Tanpa API Key, Pembaharuan Setiap Menit/Jam)
-            const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code&timezone=Asia%2FJakarta`;
+            // Mengambil data cuaca saat ini + cache buster timestamp agar data selalu segar dari server
+            const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&elevation=${elevation}&current=temperature_2m,relative_humidity_2m,weather_code&timezone=Asia%2FJakarta&_=${new Date().getTime()}`;
 
             try {
                 const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error('Gagal mengambil data cuaca');
                 const data = await response.json();
 
                 if (data && data.current) {
@@ -218,10 +221,7 @@
                     humidityElement.innerText = humidity;
                 }
             } catch (error) {
-                console.warn('Gagal memuat cuaca real-time, menggunakan estimasi:', error);
-                tempElement.innerText = '19°C';
-                conditionElement.innerText = 'Cerah Berawan';
-                humidityElement.innerText = '80';
+                console.warn('Gagal memuat cuaca real-time:', error);
             }
         }
 
@@ -241,10 +241,22 @@
             window.open(`https://wa.me/6285861166596?text=${encodedMessage}`, '_blank');
         });
 
-        // Eksekusi saat halaman dimuat
+        /* ========================================================
+           4. INISIALISASI & TIMING AUTO-UPDATE
+        ======================================================== */
         document.addEventListener('DOMContentLoaded', () => {
             updateStatusDisplay();
             fetchRealTimeWeather();
+
+            // 1. Auto-update cuaca setiap 60 detik (60.000 ms)
+            setInterval(fetchRealTimeWeather, 60000);
+
+            // 2. Auto-update langsung begitu user membuka kembali tab browser
+            document.addEventListener('visibilitychange', () => {
+                if (document.visibilityState === 'visible') {
+                    fetchRealTimeWeather();
+                }
+            });
         });
     </script>
 
